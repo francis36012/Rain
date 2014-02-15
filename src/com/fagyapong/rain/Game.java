@@ -2,6 +2,7 @@ package com.fagyapong.rain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -247215114548172830L;
@@ -43,7 +44,22 @@ public class Game extends Canvas implements Runnable{
 	public void run() {
 		
 		while (running) {
-			System.out.println("Running...");
+			update();
+			render();
+		}
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void render() {
+		BufferStrategy bs = getBufferStrategy();
+		
+		if (bs == null) {
+			createBufferStrategy(3);
+			
+			return;
 		}
 	}
 	
