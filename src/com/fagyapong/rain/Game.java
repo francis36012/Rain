@@ -15,6 +15,9 @@ public class Game extends Canvas implements Runnable{
 	public Thread thread;
 	private boolean running = false;
 	
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
+	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+	
 	public Game() {
 		
 		// Setup Game window
