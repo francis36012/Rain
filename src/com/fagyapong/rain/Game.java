@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
 
+import com.fagyapong.rain.graphics.*;
+
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -247215114548172830L;
 	
@@ -15,6 +17,8 @@ public class Game extends Canvas implements Runnable{
 	public Thread thread;
 	private boolean running = false;
 	
+	private Screen screen;
+	
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	
@@ -24,6 +28,7 @@ public class Game extends Canvas implements Runnable{
 		Dimension size = new Dimension(width * scale, height * scale);
 		setPreferredSize(size);
 		
+		screen = new Screen(width, height);
 		frame = new JFrame();
 	}
 	
