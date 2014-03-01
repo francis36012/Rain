@@ -1,10 +1,15 @@
 package com.fagyapong.rain.graphics;
 
+import java.util.*;
+
 public class Screen {
 	
 	private int width;
 	private int height;
 	public int[] pixels;
+	public int[] tiles = new int[64 * 64];
+	
+	private Random random = new Random();
 	
 	private int time = 0;
 	private int counter = 0;
@@ -14,6 +19,11 @@ public class Screen {
 		this.height = height;
 		
 		pixels = new int[width * height];
+		
+		for (int i = 0; i < 64 * 64; i++) {
+			tiles[i] = random.nextInt(0xffffff);
+		}
+		
 	}
 	
 	public void clear() {
@@ -25,14 +35,18 @@ public class Screen {
 	
 	public void render() {
 		
-		counter++;
-		if ((counter % 100) == 0) {
-			time++;
-		}
 		
 		for (int y = 0; y < height; y++) {
+			if ((y < 0) || (y >= height)) {
+				break;
+			}
 			for (int x = 0; x < width; x++) {
-				pixels[x + y * width] = 0xff00ff;
+				if ((x < 0) || (x >= width)) {
+					break;
+				}
+				
+				int tileIndex = (x >> 2) + (y >> 2) * 64;
+				pixels[x + y * width] = tiles[tileIndex];
 			}
 		}
 	}
